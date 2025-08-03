@@ -17,7 +17,7 @@ jobs:
     - name: Find Dockerfiles
       id: files
       run: |
-        files=$(find containers -type f -name 'Dockerfile' | jq -R . | jq -s .)
+        files=$(find containers -type f -name 'Dockerfile' | sed 's|./||' | jq -R . | jq -s . | tr -d "\n")
         echo -e "Dockerfiles:\n${files}"
         echo "matrix=$files" >> "$GITHUB_OUTPUT"
     outputs:
