@@ -5,9 +5,12 @@ on:
       dockerfile:
         required: true
         type: string
-    secrets:
-      token:
+  workflow_dispatch:
+    inputs:
+      dockerfile:
+        description: Dockerfile
         required: true
+        type: string
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
@@ -33,7 +36,7 @@ jobs:
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
-        password: ${{ secrets.token }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     - name: Extract metadata (tags, labels) for Docker
       id: meta
       uses: docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f
