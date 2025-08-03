@@ -1,22 +1,33 @@
-#hadolint global ignore=DL3008
+#hadolint global ignore=DL3008,DL3016
 #checkov:skip=CKV_DOCKER_2: no need for a healthcheck
 FROM ubuntu:24.04
+LABEL org.opencontainers.image.description="https://opencode.ai"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-
 # Update LOCALE
-RUN apt-get update && apt-get install -y --no-install-recommends locales && rm -rf /var/lib/apt/lists/* \
-  && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+RUN apt-get update && apt-get install -y --no-install-recommends locales && rm -rf /var/lib/apt/lists/* && \
+  localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
 
-# Install OpenCode
 RUN apt-get update && \
-  apt-get install -y --no-install-recommends curl jq unzip ca-certificates && \
+  apt-get install -y --no-install-recommends ca-certificates curl gcc git && \
   rm -rf /var/lib/apt/lists/*
-RUN version="$(curl -sL https://api.github.com/repos/sst/opencode/releases/latest | jq -r '.name')" && \
-  curl -sLo /tmp/opencode-linux-x64.zip "https://github.com/sst/opencode/releases/download/${version}/opencode-linux-x64.zip" && \
-  unzip -d /usr/bin /tmp/opencode-linux-x64.zip && \
-  rm /tmp/opencode-linux-x64.zip
 
+# Install Homebrew
+RUN mkdir /home/linuxbrew && chown ubuntu:ubuntu /home/linuxbrew
 USER ubuntu
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+ENV HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+ENV HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar"
+ENV HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
+ENV INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}"
+
+# Install Tools
+RUN brew install \
+  go golangci-lint gopls gosec \
+  prettier jq \
+  python3 pyright ruff uv \
+  sst/tap/opencode
+
 ENTRYPOINT [ "opencode" ]
