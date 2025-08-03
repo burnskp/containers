@@ -26,6 +26,7 @@ ENV INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}"
 # Install Tools
 RUN brew install \
   go golangci-lint gopls gosec \
+  node npm \
   prettier jq \
   python3 pyright ruff uv \
   sst/tap/opencode
