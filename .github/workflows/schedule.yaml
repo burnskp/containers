@@ -1,0 +1,38 @@
+name: schedule build
+on:
+  schedule:
+  - cron: 0 1 * * 0
+  workflow_dispatch:
+jobs:
+  containers:
+    name: containers
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Find Dockerfiles
+      id: files
+      run: |
+        files=$(find containers -type f -name 'Dockerfile' | jq -R . | jq -s .)
+        echo -e "Dockerfiles:\n${files}"
+        echo "matrix=$files" >> "$GITHUB_OUTPUT"
+    outputs:
+      matrix: ${{ steps.files.outputs.dockerfiles }}
+  build-and-push-image:
+    needs: containers
+    if: ${{ needs.containers.outputs.matrix != '[]' }}
+    strategy:
+      matrix:
+        dockerfile: ${{ fromJSON(needs.containers.outputs.matrix) }}
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    uses: ./.github/workflows/publish.yaml
+    with:
+      dockerfile: ${{ matrix.dockerfile }}
