@@ -58,4 +58,4 @@ jobs:
     with:
       dockerfile: ${{ matrix.dockerfile }}
     secrets:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+      token: ${{ secrets.GITHUB_TOKEN }}
