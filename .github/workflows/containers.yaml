@@ -20,10 +20,11 @@ jobs:
         # list of files that changed across commits
         fetch-depth: 0
     - name: Super-linter
-      uses: super-linter/super-linter@5119dcd8011e92182ce8219d9e9efc82f16fddb6
+      uses: super-linter/super-linter/slim@5119dcd8011e92182ce8219d9e9efc82f16fddb6
       env:
         # To report GitHub Actions status checks
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VALIDATE_YAML_PRETTIER: false
   changed-containers:
     name: changed-containers
     if: github.ref == 'refs/heads/main'

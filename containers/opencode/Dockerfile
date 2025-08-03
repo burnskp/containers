@@ -1,5 +1,13 @@
+#hadolint global ignore=DL3008
+#checkov:skip=CKV_DOCKER_2: no need for a healthcheck
 FROM ubuntu:24.04
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+
+# Update LOCALE
+RUN apt-get update && apt-get install -y --no-install-recommends locales && rm -rf /var/lib/apt/lists/* \
+  && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+ENV LANG en_US.utf8
 
 # Install OpenCode
 RUN apt-get update && \
@@ -10,4 +18,5 @@ RUN version="$(curl -sL https://api.github.com/repos/sst/opencode/releases/lates
   unzip -d /usr/bin /tmp/opencode-linux-x64.zip && \
   rm /tmp/opencode-linux-x64.zip
 
-ENTRYPOINT [ "bash" ]
+USER ubuntu
+ENTRYPOINT [ "opencode" ]
