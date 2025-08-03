@@ -49,6 +49,7 @@ jobs:
       matrix: ${{ steps.changed-files.outputs.all_changed_files }}
   build-and-push-image:
     needs: changed-containers
+    if: ${{ needs.changed-containers.outputs.matrix != '[]' }}
     strategy:
       matrix:
         dockerfile: ${{ fromJSON(needs.changed-containers.outputs.matrix) }}
