@@ -21,7 +21,7 @@ jobs:
         echo -e "Dockerfiles:\n${files}"
         echo "matrix=$files" >> "$GITHUB_OUTPUT"
     outputs:
-      matrix: ${{ steps.files.outputs.dockerfiles }}
+      matrix: ${{ steps.files.outputs.matrix }}
   build-and-push-image:
     needs: containers
     if: ${{ needs.containers.outputs.matrix != '[]' }}
