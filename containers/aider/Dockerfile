@@ -1,7 +1,6 @@
 #hadolint global ignore=DL3008,DL3013,DL3016
 #checkov:skip=CKV_DOCKER_2: no need for a healthcheck
-#hadolint ignore=DL3007
-FROM docker.io/paulgauthier/aider-full:latest
+FROM docker.io/paulgauthier/aider-full:v0.85.2
 LABEL org.opencontainers.image.description="https://aider.chat"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 USER root
