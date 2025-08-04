@@ -15,17 +15,19 @@ fi
 
 mkdir -p "$VOLUME_CONFIG"
 
-if which podman 2>&1 > /dev/null; then
+if which podman > /dev/null 2>&1; then
   podman run -it \
     --userns=keep-id \
+    --env COLORTERM=truecolor \
     --volume="$VOLUME_CONFIG:/home/ubuntu/.local/share/opencode" \
     --volume="$WORKSPACE:/workspace" \
-    $CONTAINER $*
-elif which docker 2>&1 > /dev/null; then
+    $CONTAINER "$@"
+elif which docker > /dev/null 2>&1; then
   docker run -it \
+    --env COLORTERM=truecolor \
     --volume="$VOLUME_CONFIG:/home/ubuntu/.local/share/opencode" \
     --volume="$WORKSPACE:/workspace" \
-    $CONTAINER $*
+    $CONTAINER "$@"
 else
   echo "Error: podman or docker not found."
   exit 1
