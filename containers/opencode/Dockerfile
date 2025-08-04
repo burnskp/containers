@@ -31,4 +31,7 @@ RUN brew install \
   python3 pyright ruff uv \
   sst/tap/opencode
 
+ENV OPENCODE_CONFIG=/home/ubuntu/.local/share/opencode/opencode.json
+RUN mkdir -p /home/ubuntu/.local/share/opencode
+WORKDIR /workspace
 ENTRYPOINT [ "opencode" ]
