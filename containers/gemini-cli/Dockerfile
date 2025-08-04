@@ -1,7 +1,7 @@
 #hadolint global ignore=DL3008,DL3016
 #checkov:skip=CKV_DOCKER_2: no need for a healthcheck
 FROM ubuntu:24.04
-LABEL org.opencontainers.image.description="https://opencode.ai"
+LABEL org.opencontainers.image.description="https://github.com/google-gemini/gemini-cli"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Update LOCALE
