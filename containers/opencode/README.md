@@ -1,7 +1,7 @@
 # Opencode Container
 
 This container contains opencode and supporting tools. These tools are installed
-using homebrew.
+using Homebrew.
 
 ## Formatters
 
