@@ -1,7 +1,7 @@
-# Claude Code Container
+# Codex Container
 
-This container contains Claude Code and supporting tools. These tools are
-installed using Homebrew.
+This container contains Codex and supporting tools. These tools are installed
+using Homebrew.
 
 ## Formatters
 
