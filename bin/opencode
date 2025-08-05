@@ -2,7 +2,7 @@
 set -euo pipefail
 
 APP="opencode"
-CONTAINER="ghcr.io/burnskp/containers/opencode:latest"
+CONTAINER="ghcr.io/burnskp/containers/$APP:latest"
 VOLUME_CONFIG="$HOME/.config/containers/$APP"
 
 # If a directory is provided as the first argument then use it as the workspace.
