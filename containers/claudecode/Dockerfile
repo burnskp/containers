@@ -31,4 +31,6 @@ RUN brew install \
   python3 pyright ruff uv && \
   npm install -g @anthropic-ai/claude-code
 
-ENTRYPOINT [ "claude" ]
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT [ "/entrypoint.sh" ]
