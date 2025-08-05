@@ -30,4 +30,6 @@ RUN brew install \
   node npm \
   prettier jq
 
-ENTRYPOINT ["/venv/bin/aider"]
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
