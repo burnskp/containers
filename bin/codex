@@ -18,7 +18,7 @@ PROJECT="${WORKSPACE##*/}"
 mkdir -p "$VOLUME_CONFIG"
 
 if which podman > /dev/null 2>&1; then
-  # podman pull "$CONTAINER"
+  podman pull "$CONTAINER"
   podman run -it \
     --userns=keep-id \
     --env COLORTERM=truecolor \
