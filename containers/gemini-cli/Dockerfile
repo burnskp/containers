@@ -31,4 +31,6 @@ RUN brew install \
   python3 pyright ruff uv \
   gemini-cli
 
-ENTRYPOINT [ "gemini" ]
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT [ "/entrypoint.sh" ]
