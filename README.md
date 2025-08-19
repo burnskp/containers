@@ -9,11 +9,11 @@ testing out CLI coding agents with a focus on Python and Go.
 
 ## CLI Coding Agents
 
-### [aider](https://aider.chat/)
+### [Aider](https://aider.chat/)
 
 This is one of the original CLI agentic coding tools.
 
-### [claude code](https://www.anthropic.com/claude-code)
+### [Claude Code](https://www.anthropic.com/claude-code)
 
 Anthropic's CLI agentic coding tool. Currently one of the most popular tools,
 especially due to its ability to use a Claude Pro/Max subscription instead of
