@@ -23,7 +23,7 @@ paying per token.
 
 OpenAPI's coding client. If you wish to use an API key with the
 [launcher shell script](bin/codex) then you'll need to set environment variable
-CODEX_API_KEY to the openai key you wish to use.
+CODEX_API_KEY or OPENAI_API_KEY to the openai key you wish to use.
 
 ### [Gemini CLI](https://google-gemini.github.io/gemini-cli/)
 
