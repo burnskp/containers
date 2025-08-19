@@ -19,7 +19,7 @@ Anthropic's CLI agentic coding tool. Currently one of the most popular tools,
 especially due to its ability to use a Claude Pro/Max subscription instead of
 paying per token.
 
-### Codex
+### [Codex](https://openai.com/codex/)
 
 OpenAPI's coding client. If you wish to use an API key with the
 [launcher shell script](bin/codex) then you'll need to set environment variable
